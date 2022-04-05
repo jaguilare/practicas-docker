@@ -1,0 +1,64 @@
+# lista los contenedores activos
+docker ps
+# lista todos los contenedores
+docker ps -a
+# lista el ultimo contenedor levantado
+docker ps -l
+# forza la eliminacion de un contenedor por ID
+docker rm -f ID
+# remueve los contenedores detenidos
+docker rm $(docker container ls -aq)
+# forza la eliminacion de los contenedores
+docker rm -f $(docker container ls -aq)
+# eliminar contenedor con filtro
+docker container prune --filter="label!=maintainer=Jeremy"
+
+# lista todas las imagenes
+docker images, docker image ls
+# eliminar imagen por ID
+docker image rm ID
+# forzar la eliminacion de una imagen
+docker image rm -f ID
+# eliminar image con filtro 
+docker image prune -a --filter "until=24h"
+docker image prune --filter="label=old"
+#correr una imagen docker
+docker run -p 80:80 --name my_redis -d redis
+#correr una imagen docker limitando memoria en apps java
+docker run -p 80:80 --name my_redis -d redis -e JAVA_OPTS="-Xms256M -Xmx256m"
+# Ver los recursos de hardware que estan usando los contenedores
+docker stats
+https://www.baeldung.com/ops/docker-memory-limit
+# Corre una imagen docker con limite en memoria
+docker run -p 90:90 --name redis -m 256m --memory-reservation=100m -d redis
+# Corre una imagen docker con limite en CPU
+docker run -p 90:90 --name redis --cpus=1 --cpu-shares=2000 nginx -d redis
+
+
+# lista todas las redes
+docker network ls
+# crear una red
+docker network create my_red
+# elimina una red por ID
+docker network rm ID
+
+# listar los volumenes
+docker volumen ls
+# crear volumen
+docker volume create my_volumen
+# eliminar un volumen por nombre
+docker volume rm my_volumen
+# Correr una imagen docker con volumen
+docker run --mount source=my_volumen,destination=path_into_container image/image_docker
+
+
+# Eliminar TODOS los objetos docker !!!
+docker system prune
+# Eliminar objetos docker segun:
+docker container prune
+docker image prune
+docker volume prune
+docker network prune
+
+
+
