@@ -52,6 +52,8 @@ docker volume rm my_volumen
 # Correr una imagen docker con volumen
 docker run --mount source=my_volumen,destination=path_into_container image/image_docker
 
+# las x ultimas lineas de logs con el tiempo de un contenedor 
+docker logs --tail=10 -t id_container
 
 # Eliminar TODOS los objetos docker !!!
 docker system prune
@@ -62,8 +64,11 @@ docker volume prune
 docker network prune
 
 # Docker compose
+# descargar imagenes
 docker-compone -f mi-archivo.yml pull
 # se construye sin cache
 docker-compone -f mi-archivo.yml build --no-cache
 # inicia forzando la recreacion
 docker-compome -f mi-archivo.yml up -d --force-recreate
+# reiniciar contenedor hasta un limite de veces
+restart: on-failure:10
